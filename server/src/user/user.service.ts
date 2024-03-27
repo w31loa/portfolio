@@ -3,7 +3,6 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 import * as argon2 from 'argon2'
-import { $Enums } from '@prisma/client';
 
 @Injectable()
 export class UserService {
@@ -47,25 +46,5 @@ export class UserService {
   }
 
 
-  async onModuleInit() {
-    const admin = await this.prisma.user.findFirst({where: {
-      role: "ADMIN"
-    } })
-
-    if(!admin){
-      const data = {
-        email: "admin@mail.com",
-        password_hash: await argon2.hash('root'),
-        role:"ADMIN" as $Enums.Role
-
-      }
-
-      const newAdmin = await this.prisma.user.create({data})
-
-      console.log(newAdmin)
-    }
-
-    console.log(admin)
-
-  }
+ 
 }

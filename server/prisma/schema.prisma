@@ -72,7 +72,7 @@ model Post{
 
 
   title String
-  date DateTime
+  date String
   category String 
   text String
   img String

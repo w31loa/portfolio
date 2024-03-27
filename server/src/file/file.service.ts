@@ -2,15 +2,17 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import * as path from 'path';
 import * as fs from 'fs'
 
+
+
 @Injectable()
 export class FileService {
-    async createFile(file, name:string , type:string ){
+    async createFile(file, userId:string, type:string,  name:string  ){
         console.log(type)
         console.log(path.resolve(__dirname, '..', 'static', type  , name))
         
         try{
             const fileName = name+'.jpg'
-            const filePath = path.resolve(__dirname, '..', 'static' , type )
+            const filePath = path.resolve(__dirname, '..', 'static' , userId, type  )
             if(!fs.existsSync(filePath)){
                 fs.mkdirSync(filePath, {recursive: true})
             }
